@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Classes de la Filière</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen ">
+<nav class="bg-blue-600 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+            <div class="flex items-center">
+                <span class="text-white text-xl font-semibold">Gestion Scolaire</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a th:href="@{/classes}" class="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                    Classes
+                </a>
+                <a th:href="@{/filieres}" class="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                    Filières
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="flex items-center justify-center p-4">
+    <div class="w-full max-w-8xl bg-white rounded-lg shadow-md overflow-hidden mt-8">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-bold mb-6">Classes de la Filière "<span th:text="${filiere.libelle}"></span>"</h1>
+                <a th:href="@{/classes/new}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors">
+                    Ajouter une Classe
+                </a>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-100">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Code</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Libelle</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Montant inscription</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mensualite</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Autres frais</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Filière</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                    <tr th:each="classe : ${classes}" class="hover:bg-gray-50">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" th:text="${classe.code}"></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" th:text="${classe.libelle}"></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" th:text="${classe.montantInscription}"></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" th:text="${classe.mensualite}"></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" th:text="${classe.autresFrais}"></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" th:text="${classe.filiere.libelle}"></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <a th:href="@{'/classes/edit/' + ${classe.id}}" class="text-yellow-600 hover:text-yellow-900 mr-3">Modifier</a>
+                            <a th:href="@{'/classes/delete/' + ${classe.id}}" class="text-red-600 hover:text-red-900" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette classe ?')">Supprimer</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
