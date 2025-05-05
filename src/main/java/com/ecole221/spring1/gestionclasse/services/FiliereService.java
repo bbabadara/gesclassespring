@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class FiliereService {
+public class FiliereService implements IFiliere {
 
     @Autowired
     private FiliereRepository filiereRepository;
 
     public Filiere addFiliere(Filiere filiere) {
-        if (filiereRepository.existsByLibelle(filiere.getLibelle())) {
+        if (filiereRepository.findByLibelle(filiere.getLibelle())!=null) {
             throw new RuntimeException("Le libellé de la filière existe déjà.");
         }
         return filiereRepository.save(filiere);

@@ -3,6 +3,7 @@ package com.ecole221.spring1.gestionclasse.controllers;
 
 import com.ecole221.spring1.gestionclasse.entities.Classe;
 import com.ecole221.spring1.gestionclasse.entities.Filiere;
+import com.ecole221.spring1.gestionclasse.exceptions.ScolariteException;
 import com.ecole221.spring1.gestionclasse.services.ClasseService;
 import com.ecole221.spring1.gestionclasse.services.FiliereService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +34,12 @@ public class ClasseWebController {
     @GetMapping("/new")
     public String showCreateForm(Model model) {
         List<Filiere> filieres = filiereService.getAll();
-        System.out.println(filieres);
         if(filieres == null) {
             filieres = Collections.emptyList(); // Liste vide plutôt que null
         }
 
         model.addAttribute("classe", new Classe());
-        model.addAttribute("filieres", filiereService.getAll());
+        model.addAttribute("filieres", filieres);
 
         return "classes/ajout";
     }
@@ -52,8 +52,16 @@ public class ClasseWebController {
     }
 
     @PostMapping("/save")
-    public String saveClasse(@ModelAttribute("classe") Classe classe, Model model) {
-        classeService.saveClasse(classe);
+    public String saveClasse(@ModelAttribute("classe") Classe classe,Model model) {
+
+        try {
+            classeService.saveClasse(classe);
+        } catch (ScolariteException e) {
+            model.addAttribute("classe", classe);
+            model.addAttribute("filieres", filiereService.getAll());
+            model.addAttribute("errors",e.getMessage().split("<br>"));
+            return "classes/ajout";
+        }
         return "redirect:/classes";
     }
 

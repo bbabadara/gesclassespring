@@ -2,10 +2,16 @@ package com.ecole221.spring1.gestionclasse.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Filiere {
 
     @Id
@@ -18,28 +24,5 @@ public class Filiere {
     @OneToMany(mappedBy = "filiere")
     private List<Classe> classes;
 
-    // Getters & Setters
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getLibelle() {
-        return libelle;
-    }
-
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
-    }
-
-    public List<Classe> getClasses() {
-        return classes;
-    }
-
-    public void setClasses(List<Classe> classes) {
-        this.classes = classes;
-    }
 }

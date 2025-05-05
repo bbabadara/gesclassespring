@@ -12,12 +12,16 @@ import java.util.List;
 @RequestMapping("/api/classes")
 public class ClasseController {
 
-    @Autowired
-    private ClasseService classeService;
+
+    private final ClasseService classeService;
+
+    public ClasseController(ClasseService classeService) {
+        this.classeService = classeService;
+    }
 
     @PostMapping
     public Classe addClasse(@RequestBody @Valid Classe classe) {
-        return classeService.addClasse(classe);
+        return classeService.saveClasse(classe);
     }
 
     @GetMapping

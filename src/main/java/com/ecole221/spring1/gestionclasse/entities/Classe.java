@@ -2,8 +2,14 @@ package com.ecole221.spring1.gestionclasse.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Classe {
 
     @Id
@@ -30,61 +36,5 @@ public class Classe {
     @JoinColumn(name = "filiere_id")
     private Filiere filiere;
 
-    // Getters & Setters
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getLibelle() {
-        return libelle;
-    }
-
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
-    }
-
-    public double getMontantInscription() {
-        return montantInscription;
-    }
-
-    public void setMontantInscription(double montantInscription) {
-        this.montantInscription = montantInscription;
-    }
-
-    public double getMensualite() {
-        return mensualite;
-    }
-
-    public void setMensualite(double mensualite) {
-        this.mensualite = mensualite;
-    }
-
-    public double getAutresFrais() {
-        return autresFrais;
-    }
-
-    public void setAutresFrais(double autresFrais) {
-        this.autresFrais = autresFrais;
-    }
-
-    public Filiere getFiliere() {
-        return filiere;
-    }
-
-    public void setFiliere(Filiere filiere) {
-        this.filiere = filiere;
-    }
 }
